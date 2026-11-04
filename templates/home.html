@@ -1,106 +1,174 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f4f7f6; }
+        .container { max-width: 800px; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: 0 auto; }
+        h2 { text-align: center; color: #333; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input, select { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        button { width: 100%; padding: 12px; background-color: #28a745; color: white; border: none; font-size: 16px; border-radius: 4px; cursor: pointer; margin-top: 15px; }
+        button:hover { background-color: #218838; }
+        .result { margin-top: 25px; padding: 15px; background: #e9ecef; border-radius: 4px; text-align: center; }
+        .result h3 { margin: 5px 0; color: #0056b3; }
+    </style>
 </head>
-   <body>
-      <title>Churn Prediction</title>
-	  <div class="container">
-		<div class="row">
+<body>
 
-		  <form action="http://localhost:5000/" method="POST">
-		  	<div class="col-sm-9">
-			 <div class="form-group  purple-border">
-				  <label for="comment">SeniorCitizen:</label>
-				  <textarea class="form-control" rows="2" id="query1" name="query1" rows="2" cols="5" autofocus>{{query1}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">MonthlyCharges:</label>
-				  <textarea class="form-control" rows="2" id="query2" name="query2" rows="2" cols="5" autofocus>{{query2}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">TotalCharges:</label>
-				  <textarea class="form-control" rows="2" id="query3" name="query3" rows="2" cols="5" autofocus>{{query3}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">gender:</label>
-				  <textarea class="form-control" rows="2" id="query4" name="query4" rows="2" cols="5" autofocus>{{query4}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">Partner:</label>
-				  <textarea class="form-control" rows="2" id="query5" name="query5" rows="2" cols="5" autofocus>{{query5}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">Dependents:</label>
-				  <textarea class="form-control" rows="2" id="query6" name="query6" rows="2" cols="5" autofocus>{{query6}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">PhoneService:</label>
-				  <textarea class="form-control" rows="2" id="query7" name="query7" rows="2" cols="5" autofocus>{{query7}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">MultipleLines:</label>
-				  <textarea class="form-control" rows="2" id="query8" name="query8" rows="2" cols="5" autofocus>{{query8}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">InternetService:</label>
-				  <textarea class="form-control" rows="2" id="query9" name="query9" rows="2" cols="5" autofocus>{{query9}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">OnlineSecurity:</label>
-				  <textarea class="form-control" rows="2" id="query10" name="query10" rows="2" cols="5" autofocus>{{query10}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">OnlineBackup:</label>
-				  <textarea class="form-control" rows="2" id="query11" name="query11" rows="2" cols="5" autofocus>{{query11}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">DeviceProtection:</label>
-				  <textarea class="form-control" rows="2" id="query12" name="query12" rows="2" cols="5" autofocus>{{query12}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">TechSupport:</label>
-				  <textarea class="form-control" rows="2" id="query13" name="query13" rows="2" cols="5" autofocus>{{query13}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">StreamingTV:</label>
-				  <textarea class="form-control" rows="2" id="query14" name="query14" rows="2" cols="5" autofocus>{{query14}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">StreamingMovies:</label>
-				  <textarea class="form-control" rows="2" id="query15" name="query15" rows="2" cols="5" autofocus>{{query15}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">Contract:</label>
-				  <textarea class="form-control" rows="2" id="query16" name="query16" rows="2" cols="5" autofocus>{{query16}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">PaperlessBilling:</label>
-				  <textarea class="form-control" rows="2" id="query17" name="query17" rows="2" cols="5" autofocus>{{query17}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">PaymentMethod:</label>
-				  <textarea class="form-control" rows="2" id="query18" name="query18" rows="2" cols="5" autofocus>{{query18}}</textarea>
-			</div>
-			<div class="form-group  purple-border">
-				  <label for="comment">tenure:</label>
-				  <textarea class="form-control" rows="2" id="query19" name="query19" rows="2" cols="5" autofocus>{{query19}}</textarea>
-			</div>
-			</div>
-			<div class="col-sm-3">
-			<button type="submit" class="btn btn-primary" name="submit">SUBMIT</button>
-			</div>
-		  </form>
-		  </div>
-		  
-		<div class="row"> 
-			<div class="col-sm-9">
-			<textarea class="form-control" rows="2" id="comment" name="query6" rows="2" cols="5" autofocus>{{output1}}</textarea>
-			<textarea class="form-control" rows="2" id="comment" name="query7" rows="2" cols="5" autofocus>{{output2}}</textarea>
-			</div>
-		</div>
-	</div>		
-   </body>
+<div class="container">
+    <h2>Customer Churn Prediction</h2>
+
+    <form action="/" method="POST">
+        <div class="grid">
+            <div class="form-group">
+                <label>1. Senior Citizen (0 or 1):</label>
+                <input type="number" name="query1" value="{{ query1 if query1 else '0' }}" required>
+            </div>
+            <div class="form-group">
+                <label>2. Monthly Charges ($):</label>
+                <input type="text" name="query2" value="{{ query2 if query2 else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label>3. Total Charges ($):</label>
+                <input type="text" name="query3" value="{{ query3 if query3 else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label>4. Gender:</label>
+                <select name="query4">
+                    <option value="Male" {% if query4 == 'Male' %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if query4 == 'Female' %}selected{% endif %}>Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>5. Partner:</label>
+                <select name="query5">
+                    <option value="Yes" {% if query5 == 'Yes' %}selected{% endif %}>Yes</option>
+                    <option value="No" {% if query5 == 'No' %}selected{% endif %}>No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>6. Dependents:</label>
+                <select name="query6">
+                    <option value="Yes" {% if query6 == 'Yes' %}selected{% endif %}>Yes</option>
+                    <option value="No" {% if query6 == 'No' %}selected{% endif %}>No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>7. Phone Service:</label>
+                <select name="query7">
+                    <option value="Yes" {% if query7 == 'Yes' %}selected{% endif %}>Yes</option>
+                    <option value="No" {% if query7 == 'No' %}selected{% endif %}>No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>8. Multiple Lines:</label>
+                <select name="query8">
+                    <option value="No" {% if query8 == 'No' %}selected{% endif %}>No</option>
+                    <option value="Yes" {% if query8 == 'Yes' %}selected{% endif %}>Yes</option>
+                    <option value="No phone service" {% if query8 == 'No phone service' %}selected{% endif %}>No phone service</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>9. Internet Service:</label>
+                <select name="query9">
+                    <option value="DSL" {% if query9 == 'DSL' %}selected{% endif %}>DSL</option>
+                    <option value="Fiber optic" {% if query9 == 'Fiber optic' %}selected{% endif %}>Fiber optic</option>
+                    <option value="No" {% if query9 == 'No' %}selected{% endif %}>No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>10. Online Security:</label>
+                <select name="query10">
+                    <option value="No" {% if query10 == 'No' %}selected{% endif %}>No</option>
+                    <option value="Yes" {% if query10 == 'Yes' %}selected{% endif %}>Yes</option>
+                    <option value="No internet service" {% if query10 == 'No internet service' %}selected{% endif %}>No internet service</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>11. Online Backup:</label>
+                <select name="query11">
+                    <option value="No" {% if query11 == 'No' %}selected{% endif %}>No</option>
+                    <option value="Yes" {% if query11 == 'Yes' %}selected{% endif %}>Yes</option>
+                    <option value="No internet service" {% if query11 == 'No internet service' %}selected{% endif %}>No internet service</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>12. Device Protection:</label>
+                <select name="query12">
+                    <option value="No" {% if query12 == 'No' %}selected{% endif %}>No</option>
+                    <option value="Yes" {% if query12 == 'Yes' %}selected{% endif %}>Yes</option>
+                    <option value="No internet service" {% if query12 == 'No internet service' %}selected{% endif %}>No internet service</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>13. Tech Support:</label>
+                <select name="query13">
+                    <option value="No" {% if query13 == 'No' %}selected{% endif %}>No</option>
+                    <option value="Yes" {% if query13 == 'Yes' %}selected{% endif %}>Yes</option>
+                    <option value="No internet service" {% if query13 == 'No internet service' %}selected{% endif %}>No internet service</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>14. Streaming TV:</label>
+                <select name="query14">
+                    <option value="No" {% if query14 == 'No' %}selected{% endif %}>No</option>
+                    <option value="Yes" {% if query14 == 'Yes' %}selected{% endif %}>Yes</option>
+                    <option value="No internet service" {% if query14 == 'No internet service' %}selected{% endif %}>No internet service</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>15. Streaming Movies:</label>
+                <select name="query15">
+                    <option value="No" {% if query15 == 'No' %}selected{% endif %}>No</option>
+                    <option value="Yes" {% if query15 == 'Yes' %}selected{% endif %}>Yes</option>
+                    <option value="No internet service" {% if query15 == 'No internet service' %}selected{% endif %}>No internet service</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>16. Contract:</label>
+                <select name="query16">
+                    <option value="Month-to-month" {% if query16 == 'Month-to-month' %}selected{% endif %}>Month-to-month</option>
+                    <option value="One year" {% if query16 == 'One year' %}selected{% endif %}>One year</option>
+                    <option value="Two year" {% if query16 == 'Two year' %}selected{% endif %}>Two year</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>17. Paperless Billing:</label>
+                <select name="query17">
+                    <option value="Yes" {% if query17 == 'Yes' %}selected{% endif %}>Yes</option>
+                    <option value="No" {% if query17 == 'No' %}selected{% endif %}>No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>18. Payment Method:</label>
+                <select name="query18">
+                    <option value="Electronic check" {% if query18 == 'Electronic check' %}selected{% endif %}>Electronic check</option>
+                    <option value="Mailed check" {% if query18 == 'Mailed check' %}selected{% endif %}>Mailed check</option>
+                    <option value="Bank transfer (automatic)" {% if query18 == 'Bank transfer (automatic)' %}selected{% endif %}>Bank transfer (automatic)</option>
+                    <option value="Credit card (automatic)" {% if query18 == 'Credit card (automatic)' %}selected{% endif %}>Credit card (automatic)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>19. Tenure (Months):</label>
+                <input type="number" name="query19" value="{{ query19 if query19 else '1' }}" required>
+            </div>
+        </div>
+
+        <button type="submit">Predict Churn</button>
+    </form>
+
+    {% if output1 %}
+    <div class="result">
+        <h3>{{ output1 }}</h3>
+        <h3>{{ output2 }}</h3>
+    </div>
+    {% endif %}
+</div>
+
+</body>
 </html>
