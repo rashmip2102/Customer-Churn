@@ -15,7 +15,6 @@ def loadPage():
 
 @app.route("/", methods=['POST'])
 def predict():
-    # 1. Fetch form inputs
     inputQuery1 = request.form['query1']
     inputQuery2 = request.form['query2']
     inputQuery3 = request.form['query3']
@@ -68,18 +67,14 @@ def predict():
         'PaymentMethod', 'tenure'
     ])
     
-    # Concatenate with base dataframe
     df_2 = pd.concat([df1, new_df], ignore_index=True) 
     
-    # Bin tenure (no spaces around hyphen to match fit time feature names)
     labels = ["{0}-{1}".format(i, i + 11) for i in range(1, 72, 12)]
     df_2['tenure_group'] = pd.cut(df_2.tenure.astype(int), range(1, 80, 12), right=False, labels=labels)
     df_2.drop(columns=['tenure'], axis=1, inplace=True)   
     
-    # One-hot encode all columns (retains MonthlyCharges and TotalCharges)
     df_dummies = pd.get_dummies(df_2)
     
-    # Align DataFrame columns with exact model feature names
     if hasattr(model, 'feature_names_in_'):
         df_dummies = df_dummies.reindex(columns=model.feature_names_in_, fill_value=0)
     
