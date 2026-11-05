@@ -77,7 +77,7 @@ def predict():
 
         labels = ["{0}-{1}".format(i, i + 11) for i in range(1, 72, 12)]
         df_2['tenure_group'] = pd.cut(df_2.tenure.astype(int), range(1, 80, 12), right=False, labels=labels)
-        df_2.drop(columns=['tenure'], axis=1, inplace=True)
+        df_2.drop(columns=['tenure'], inplace=True)
 
         df_dummies = pd.get_dummies(df_2)
 
